@@ -14,9 +14,14 @@ if __name__ == '__main__':
     image_path = input('Enter your image path (None if not): ')
     addition_content = input('Enter your addition content (None if not): ')
 
-    # -> Media Mixing
-    MediaMixer = StableDiffusionv1point5() 
-    image_output = MediaMixer.generate(lm_output=lm_output, 
-                                       addition_content=addition_content, 
-                                       image_path=image_path)
-    
+    # -> Choose method for Media Mixing
+    option = input('Enter your method: ')
+
+    if (option == 1): # 1 -> Generative Approach
+        MediaMixer = StableDiffusionv1point5() 
+        image_output = MediaMixer.generate(lm_output=lm_output, 
+                                        addition_content=addition_content, 
+                                        image_path=image_path)
+    elif (option == 2): # 2 -> Image Processing + Content synthesis
+        pass
+        
