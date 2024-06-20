@@ -103,7 +103,7 @@ class ImageUnderstanding(nn.Module):
                                                        trust_remote_code=True)
     
     def process(self, image_path=None):
-        raw_image = Image.open(requests.get(image_path, stream=True).raw)
+        raw_image = Image.open(image_path)
 
         prompt = """<|im_start|>user
                     <image>
