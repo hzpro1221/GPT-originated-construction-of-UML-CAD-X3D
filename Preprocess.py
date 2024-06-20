@@ -16,15 +16,17 @@ class ImageCropperByYOLOv8(nn.Module):
         self.names = self.model.names
     def cropping(self, option, image_path=None, video_path=None):
         if (option == 0): # Crop for Image
-            image = cv2.imread() 
+            im0 = cv2.imread(image_path) 
 
             crop_dir_name = "Image_crop"
             if not os.path.exists(crop_dir_name):
                 os.mkdir(crop_dir_name)
 
             results = self.model.predict(im0, show=False)
+
             boxes = results[0].boxes.xyxy.cpu().tolist()
             clss = results[0].boxes.cls.cpu().tolist()
+            names = results[0].names
             annotator = Annotator(im0, line_width=2, example=self.names)
 
             idx = 0
@@ -35,9 +37,8 @@ class ImageCropperByYOLOv8(nn.Module):
 
                     crop_obj = im0[int(box[1]) : int(box[3]), int(box[0]) : int(box[2])]
 
-                    cv2.imwrite(os.path.join(crop_dir_name, cls ,str(idx) + ".png"), crop_obj)
+                    cv2.imwrite(os.path.join(crop_dir_name, names[cls] + str(idx) + ".png"), crop_obj)
 
-            image.release()
             cv2.destroyAllWindows()
 
         if (option == 1):  # Crop for Video
