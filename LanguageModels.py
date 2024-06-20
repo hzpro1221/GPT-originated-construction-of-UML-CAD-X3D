@@ -12,7 +12,7 @@ class TinyLlama(nn.Module):
                              device_map="auto")
     
     def generate(self, prompt):
-        # Need prompt engeneering for clear output
+        # Need prompt engeneering for clearer output
         # ---------------------------------------------------
         messages = [
             {

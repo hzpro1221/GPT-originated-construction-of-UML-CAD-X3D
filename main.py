@@ -1,6 +1,6 @@
 from LanguageModels import TinyLlama
 from MediaMixing import StableDiffusionv1point5
-from Preprocess import ImageCropperByYOLOv8
+from Preprocess import ImageCropperByYOLOv8, ImageUnderstanding
 
 if __name__ == '__main__':
     prompt = 'design for me a cat with a lot of detail' # Your request
@@ -27,7 +27,10 @@ if __name__ == '__main__':
                                         addition_content=addition_content, 
                                         image_path=image_path)
     elif (option == 2): # 2 -> Image Processing + Content synthesis
-        ImageProcesser = ImageCropperByYOLOv8()
-        ImageProcesser.cropping(option=1, image_path=image_path)
+        ImageCroper = ImageCropperByYOLOv8()
+        ImageCroper.cropping(option=1, image_path=image_path)
+
+        ImageUnserstander = ImageUnderstanding()
+        response = ImageUnserstander.process(image_path=image_path)
     
         
