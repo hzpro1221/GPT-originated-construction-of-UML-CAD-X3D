@@ -31,8 +31,10 @@ class StableDiffusionv1point5(nn.Module):
         if (image_path != 'None'):
             init_image = load_image(image_path)
             image = self.pipeline_img2img(prompt, image=init_image).images[0]
-            return image
+            image.save('/content/GPT-originated-construction-of-UML-CAD-X3D/output.png') # Save image
+            return None
         else:
             generator = torch.Generator("cuda").manual_seed(31)
             image = self.pipeline_text2img(prompt, generator=generator).images[0]
-            return image
+            image.save('/content/GPT-originated-construction-of-UML-CAD-X3D/output.png') # Save image
+            return None

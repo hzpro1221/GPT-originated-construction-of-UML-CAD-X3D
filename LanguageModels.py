@@ -12,16 +12,20 @@ class TinyLlama(nn.Module):
                              device_map="auto")
     
     def generate(self, prompt):
+        # Need prompt engeneering for clear output
+        # ---------------------------------------------------
         messages = [
             {
                 "role": "system",
-                "content": "You are a friendly chatbot"
+                "content": "You are a friendly chatbot" 
+
             },
             {
                 "role": "user",
                 "content": f"{prompt}"
             }
         ]
+        # ---------------------------------------------------
         prompt = self.pipe.tokenizer.apply_chat_template(messages, 
                                                          tokenize=False, 
                                                          add_generation_prompt=True)
